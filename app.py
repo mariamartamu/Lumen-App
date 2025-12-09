@@ -107,8 +107,11 @@ def dashboard():
     if not is_trial_valid():
         return "Your 7-day trial has expired. Please subscribe to continue.", 403
 
-    user = session.get('user')
-    if not user or not user.get("name") or not user.get("age"):
+    user = session.get('user', {})
+
+    # Ensure all required fields are filled
+    required_fields = ['name', 'age', 'bio', 'goals', 'interests']
+    if not all(user.get(field) for field in required_fields):
         return redirect(url_for("profile"))
 
     signup_time = datetime.strptime(session.get('signup_time'), '%Y-%m-%d %H:%M:%S')
