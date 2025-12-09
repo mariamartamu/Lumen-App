@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, redirect, session, url_for
 from datetime import datetime, timedelta
 import os
@@ -80,16 +79,25 @@ def callback():
     if 'signup_time' not in session:
         session['signup_time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    session['user'] = {
-        'name': "Lumen User",
-        'age': "25",
-        'bio': "Lover of calm mornings 🌅",
-        'goals': "Meditation, balance, and happiness",
-        'interests': "Yoga, journaling, green tea 🍵",
-        'profile_pic_url': "https://via.placeholder.com/100"
-    }
+    return redirect(url_for('profile'))
 
-    return redirect(url_for('dashboard'))
+@app.route("/profile", methods=["GET", "POST"])
+def profile():
+    if 'id_token' not in session:
+        return redirect(url_for('login'))
+
+    if request.method == "POST":
+        session['user'] = {
+            'name': request.form.get('name'),
+            'age': request.form.get('age'),
+            'bio': request.form.get('bio'),
+            'goals': request.form.get('goals'),
+            'interests': request.form.get('interests'),
+            'profile_pic_url': request.form.get('profile_pic_url') or "https://via.placeholder.com/100"
+        }
+        return redirect(url_for('dashboard'))
+
+    return render_template("profile.html", user=session.get('user', {}))
 
 @app.route("/dashboard")
 def dashboard():
@@ -99,9 +107,12 @@ def dashboard():
     if not is_trial_valid():
         return "Your 7-day trial has expired. Please subscribe to continue.", 403
 
+    user = session.get('user')
+    if not user or not user.get("name") or not user.get("age"):
+        return redirect(url_for("profile"))
+
     signup_time = datetime.strptime(session.get('signup_time'), '%Y-%m-%d %H:%M:%S')
     days_left = (signup_time + timedelta(days=TRIAL_PERIOD_DAYS) - datetime.now()).days
-    user = session.get('user', {})
 
     return render_template("dashboard.html", days_left=days_left, user=user)
 
