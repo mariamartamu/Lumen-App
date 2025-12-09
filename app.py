@@ -1,5 +1,4 @@
 
-
 from flask import Flask, render_template, request, redirect, session, url_for
 from datetime import datetime, timedelta
 import os
@@ -10,13 +9,13 @@ import base64
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Secret key for session management
 
-# ==== AWS Cognito Configuration ====
-COGNITO_DOMAIN = "https://us-east-2cgam6s9zx.auth.us-east-2.amazoncognito.com"
-CLIENT_ID = "2e5g6fhuebrda5809pf2k7at4n"
-CLIENT_SECRET = "24fa3gh0h5d1h4gsqrhleffk0fgu1k177erfbhccfhtg45m6pri"
-REDIRECT_URI = "https://drouthy-jenee-unrelishable.ngrok-free.dev/callback"
-LOGOUT_REDIRECT_URI = "https://drouthy-jenee-unrelishable.ngrok-free.dev"
-REGION = "us-east-2"
+# ==== AWS Cognito Configuration (from environment variables) ====
+COGNITO_DOMAIN = os.environ.get("COGNITO_DOMAIN")
+CLIENT_ID = os.environ.get("CLIENT_ID")
+CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
+REDIRECT_URI = os.environ.get("REDIRECT_URI")
+LOGOUT_REDIRECT_URI = os.environ.get("LOGOUT_REDIRECT_URI")
+REGION = os.environ.get("REGION")
 SCOPES = "openid+profile+email"
 
 # ==== Trial Logic ====
@@ -117,8 +116,4 @@ def logout():
     return redirect(logout_url)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
-if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-REDIRECT_URI = "https://drouthy-jenee-unrelishable.ngrok-free.dev/callback"
-
