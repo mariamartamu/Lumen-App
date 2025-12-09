@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
             color: #ff8b6a;
         }
         form {
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto;
             background: #fff;
             padding: 30px;
@@ -28,7 +29,7 @@
             margin-top: 15px;
             font-weight: bold;
         }
-        input, textarea {
+        input, select, textarea {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -60,16 +61,42 @@
         <input type="number" id="age" name="age" required>
 
         <label for="goals">Wellness Goals</label>
-        <textarea id="goals" name="goals" rows="2"></textarea>
+        <select id="goals" name="goals" required>
+            <option value="">--Select your goal--</option>
+            <option value="Fat Loss">Fat Loss</option>
+            <option value="Gain Muscle Mass">Gain Muscle Mass</option>
+            <option value="Practice Wellness">Practice Wellness</option>
+            <option value="Live a Healthy Lifestyle">Live a Healthy Lifestyle</option>
+        </select>
 
         <label for="interests">Interests</label>
-        <textarea id="interests" name="interests" rows="2"></textarea>
+        <select id="interests" name="interests" required>
+            <option value="">--Select your interest--</option>
+            <option value="Yoga">Yoga</option>
+            <option value="Pilates">Pilates</option>
+            <option value="Running">Running</option>
+            <option value="Cycling">Cycling</option>
+            <option value="HIIT">HIIT</option>
+            <option value="Weightlifting">Weightlifting</option>
+            <option value="Swimming">Swimming</option>
+            <option value="Soccer">Soccer</option>
+            <option value="Other">Other</option>
+        </select>
 
         <label for="bio">Short Bio</label>
         <textarea id="bio" name="bio" rows="3"></textarea>
 
         <label for="profile_pic_url">Profile Picture URL</label>
-        <input type="url" id="profile_pic_url" name="profile_pic_url">
+        <input type="url" id="profile_pic_url" name="profile_pic_url" placeholder="https://example.com/photo.jpg">
+
+        <label for="sleep_hours">Sleep Hours (per night)</label>
+        <input type="number" id="sleep_hours" name="sleep_hours" min="0" max="24" step="0.1">
+
+        <label for="water_intake">Water Intake (ml per day)</label>
+        <input type="number" id="water_intake" name="water_intake" min="0">
+
+        <label for="exercise_time">Exercise Time (minutes per day)</label>
+        <input type="number" id="exercise_time" name="exercise_time" min="0">
 
         <button type="submit">Save Profile</button>
     </form>

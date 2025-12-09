@@ -93,11 +93,22 @@ def profile():
             'bio': request.form.get('bio'),
             'goals': request.form.get('goals'),
             'interests': request.form.get('interests'),
-            'profile_pic_url': request.form.get('profile_pic_url') or "https://via.placeholder.com/100"
+            'profile_pic_url': request.form.get('profile_pic_url') or "https://via.placeholder.com/100",
+            'sleep_hours': request.form.get('sleep_hours'),
+            'water_intake': request.form.get('water_intake'),
+            'exercise_time': request.form.get('exercise_time')
         }
         return redirect(url_for('dashboard'))
 
-    return render_template("profile.html", user=session.get('user', {}))
+    # Pass dropdown options to the template
+    goals_options = [
+        "Fat Loss", "Gain Muscle Mass", "Practice Wellness", "Live a Healthy Lifestyle", "Other"
+    ]
+    interest_options = [
+        "Yoga", "Pilates", "Running", "Cycling", "Soccer", "Swimming",
+        "Boxing", "Dancing", "Strength Training", "Other"
+    ]
+    return render_template("profile.html", user=session.get('user', {}), goals_options=goals_options, interest_options=interest_options)
 
 @app.route("/dashboard")
 def dashboard():
@@ -107,11 +118,8 @@ def dashboard():
     if not is_trial_valid():
         return "Your 7-day trial has expired. Please subscribe to continue.", 403
 
-    user = session.get('user', {})
-
-    # Ensure all required fields are filled
-    required_fields = ['name', 'age', 'bio', 'goals', 'interests']
-    if not all(user.get(field) for field in required_fields):
+    user = session.get('user')
+    if not user or not user.get("name") or not user.get("age"):
         return redirect(url_for("profile"))
 
     signup_time = datetime.strptime(session.get('signup_time'), '%Y-%m-%d %H:%M:%S')
@@ -131,3 +139,4 @@ def logout():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
