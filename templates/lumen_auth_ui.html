@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Lumen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(to bottom right, #ffe7e7, #e3f0ff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }
+        .btn {
+            background-color: #7e5bef;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #5c3ee7;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Lumen! ✨</h1>
+    <p>Enjoy your <strong>7-day free trial</strong> to improve your daily wellness.</p>
+    <div class="button-container">
+        <a class="btn" href="https://us-east-2cgam6s9zx.auth.us-east-2.amazoncognito.com/login?client_id=2e5g6fhuebrda5809pf2k7at4n&response_type=code&scope=email+openid+phone&redirect_uri=https://lumen.auth.us-east-2.amazoncognito.com/oauth2/idpresponse">Sign In</a>
+        <a class="btn" href="https://us-east-2cgam6s9zx.auth.us-east-2.amazoncognito.com/signup?client_id=2e5g6fhuebrda5809pf2k7at4n&response_type=code&scope=email+openid+phone&redirect_uri=https://lumen.auth.us-east-2.amazoncognito.com/oauth2/idpresponse">Start Free Trial</a>
+    </div>
+</body>
+</html>

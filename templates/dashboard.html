@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lumen Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #fef9f3;
+            text-align: center;
+            padding-top: 60px;
+            color: #444;
+        }
+        h1 {
+            font-size: 42px;
+            color: #ff8b6a;
+        }
+        p {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #ff6a47;
+        }
+        .button {
+            background-color: #ff8b6a;
+            color: white;
+            padding: 12px 26px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 8px;
+            margin: 12px;
+            display: inline-block;
+        }
+        .button:hover {
+            background-color: #ff6a47;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .profile {
+            margin-top: 40px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+        .profile img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .profile h2 {
+            margin: 10px 0 5px;
+            color: #ff8b6a;
+        }
+        .profile p {
+            margin: 6px;
+            font-size: 17px;
+        }
+        .icon {
+            margin-right: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Your Lumen Dashboard ✨</h1>
+        <p>You're enjoying your <span class="highlight">7-day free trial</span> 🌱</p>
+        {% if days_left > 0 %}
+            <p>You have <span class="highlight">{{ days_left }} day{{ 's' if days_left > 1 else '' }}</span> remaining in your trial.</p>
+            <a href="#" class="button">Subscribe Now 💳</a>
+        {% else %}
+            <p class="highlight">Your free trial has ended.</p>
+            <a href="#" class="button">Subscribe to Continue 💳</a>
+        {% endif %}
+        <br>
+        <a href="/logout" class="button">Log Out 🔒</a>
+
+        <div class="profile">
+            <img src="{{ user.profile_pic_url or 'https://via.placeholder.com/100' }}" alt="Profile Picture">
+            <h2>{{ user.name or "Your Name" }}</h2>
+            <p><span class="icon">🎂</span><strong>Age:</strong> {{ user.age or "Not provided" }}</p>
+            <p><span class="icon">🎯</span><strong>Goals:</strong> {{ user.goals or "Set your wellness goals" }}</p>
+            <p><span class="icon">🌟</span><strong>Interests:</strong> {{ user.interests or "Add your interests" }}</p>
+            <p><span class="icon">📝</span><strong>Bio:</strong> {{ user.bio or "Tell us more about yourself" }}</p>
+        </div>
+    </div>
+</body>
+</html>

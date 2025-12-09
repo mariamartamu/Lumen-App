@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Lumen</title>
+</head>
+<body>
+    <h1>Hello from Lumen!</h1>
+    <p>Your Lumen app is connected and running 🎉</p>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lumen Wellness Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Welcome to Lumen</h1>
+    <p>Enter your daily wellness data:</p>
+
+    <form action="/submit" method="post">
+        <label>Sleep (hours): <input type="number" name="sleep" step="0.1" required></label><br>
+        <label>Hydration (liters): <input type="number" name="hydration" step="0.1" required></label><br>
+        <label>Meditation (minutes): <input type="number" name="meditation" step="1" required></label><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <hr>
+    <h2>Your Wellness Overview</h2>
+    <canvas id="wellnessChart" width="400" height="200"></canvas>
+
+    <script>
+        const ctx = document.getElementById('wellnessChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Sleep', 'Hydration', 'Meditation'],
+                datasets: [{
+                    label: 'Today\'s Data',
+                    data: [{{ sleep }}, {{ hydration }}, {{ meditation }}],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+    </script>
+</body>
+</html>
+<a href="https://us-east-2cgam6s9zx.auth.us-east-2.amazoncognito.com/login?client_id=2e5g6fhuebrda5809pf2k7at4n&response_type=code&scope=email+openid+phone&redirect_uri=http://127.0.0.1:5000/callback">
+  <button>Sign In / Register</button>
+</a>
